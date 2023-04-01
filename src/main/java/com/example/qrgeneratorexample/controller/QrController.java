@@ -22,11 +22,11 @@ public class QrController {
     private final QrService qrService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> createQrCode(@RequestPart String text,
-                                               @RequestPart String size,
-                                               @RequestPart String color,
-                                               @RequestPart String backgroundColor,
-                                               @RequestPart(required = false) MultipartFile imageFile) throws IOException {
+    public ResponseEntity<byte[]> createQrCode(@RequestParam String text,
+                                               @RequestParam String size,
+                                               @RequestParam String color,
+                                               @RequestParam String backgroundColor,
+                                               @RequestParam(required = false) MultipartFile imageFile) throws IOException {
 
         CreateQrRequest request = CreateQrRequest.builder()
                 .text(text)

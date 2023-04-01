@@ -29,8 +29,8 @@ public class DummyData {
     public static CreateQrRequest getDummyCreateQrRequest() {
         return CreateQrRequest.builder()
                 .text("Dummy Value Text")
-                .color("#278E09")
-                .backgroundColor("#2944F3")
+                .color("#0046FF")
+                .backgroundColor("#64FF00")
                 .size("small")
                 .build();
     }
