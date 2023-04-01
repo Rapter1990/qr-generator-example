@@ -5,7 +5,6 @@ import com.example.qrgeneratorexample.dto.QrResponseDTO;
 import com.example.qrgeneratorexample.model.QrEntity;
 import com.example.qrgeneratorexample.payload.request.CreateQrRequest;
 import com.example.qrgeneratorexample.payload.response.QrResponse;
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ public class QrMapper {
                     .color(request.getColor())
                     .backgroundColor(request.getBackgroundColor())
                     .size(request.getSize())
-                    .image(imageFile.getBytes())
+                    .image(imageFile!=null ? imageFile.getBytes() :  null)
                     .build();
     }
 
