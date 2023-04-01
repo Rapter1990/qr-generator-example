@@ -4,15 +4,17 @@ import com.example.qrgeneratorexample.base.BaseServiceTest;
 import com.example.qrgeneratorexample.data.DummyData;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
-import com.google.zxing.MultiFormatReader;
+import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,10 +36,11 @@ class QrServiceTest extends BaseServiceTest {
         assertThat(responseDTO).isNotNull();
         assertThat(responseDTO.getBody()).isNotNull().isNotEmpty();
 
-        var binaryBitMap = new BinaryBitmap(new HybridBinarizer(
-                new BufferedImageLuminanceSource(ImageIO.read(new ByteArrayInputStream(responseDTO.getBody())))));
+        byte[] binaryData = responseDTO.getBody();
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(binaryData));
+        BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(bufferedImage)));
 
-        var result = new MultiFormatReader().decode(binaryBitMap);
+        Result result = new QRCodeReader().decode(binaryBitmap);
 
         assertEquals(result.getText(), requestDTO.getText());
         assertEquals(result.getBarcodeFormat(), BarcodeFormat.QR_CODE);
@@ -56,10 +59,11 @@ class QrServiceTest extends BaseServiceTest {
         assertThat(responseDTO.getBody()).isNotNull().isNotEmpty();
 
 
-        var binaryBitMap = new BinaryBitmap(new HybridBinarizer(
-                new BufferedImageLuminanceSource(ImageIO.read(new ByteArrayInputStream(responseDTO.getBody())))));
+        byte[] binaryData = responseDTO.getBody();
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(binaryData));
+        BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(bufferedImage)));
 
-        var result = new MultiFormatReader().decode(binaryBitMap);
+        var result = new QRCodeReader().decode(binaryBitmap);
 
         assertEquals(result.getText(), requestDTO.getText());
         assertEquals(result.getBarcodeFormat(), BarcodeFormat.QR_CODE);
