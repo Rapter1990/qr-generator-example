@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "f9e65437-2930-48ff-8381-66a57c3210dc",
+		"name": "QR-Generator-collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create QR Code With Image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "text",
+							"value": "Merhaba",
+							"type": "default"
+						},
+						{
+							"key": "size",
+							"value": "small",
+							"type": "default"
+						},
+						{
+							"key": "color",
+							"value": "#0046FF",
+							"type": "default"
+						},
+						{
+							"key": "backgroundColor",
+							"value": "#64FF00",
+							"type": "default"
+						},
+						{
+							"key": "imageFile",
+							"type": "file",
+							"src": "/C:/Users/Noyan/Desktop/java-original-wordmark.png"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/qr-generator",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"qr-generator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create QR CODE Without Image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "text",
+							"value": "Merhaba",
+							"type": "default"
+						},
+						{
+							"key": "size",
+							"value": "small",
+							"type": "default"
+						},
+						{
+							"key": "color",
+							"value": "#0046FF",
+							"type": "default"
+						},
+						{
+							"key": "backgroundColor",
+							"value": "#64FF00",
+							"type": "default"
+						},
+						{
+							"key": "imageFile",
+							"type": "file",
+							"src": "/C:/Users/Noyan/Desktop/java-original-wordmark.png",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/qr-generator",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"qr-generator"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
