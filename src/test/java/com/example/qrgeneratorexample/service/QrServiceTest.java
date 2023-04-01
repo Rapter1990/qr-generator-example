@@ -4,10 +4,9 @@ import com.example.qrgeneratorexample.base.BaseServiceTest;
 import com.example.qrgeneratorexample.data.DummyData;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
-import com.google.zxing.Result;
+import com.google.zxing.MultiFormatReader;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
-import com.google.zxing.qrcode.QRCodeReader;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -40,7 +39,7 @@ class QrServiceTest extends BaseServiceTest {
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(binaryData));
         BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(bufferedImage)));
 
-        Result result = new QRCodeReader().decode(binaryBitmap);
+        var result = new MultiFormatReader().decode(binaryBitmap);
 
         assertEquals(result.getText(), requestDTO.getText());
         assertEquals(result.getBarcodeFormat(), BarcodeFormat.QR_CODE);
@@ -63,7 +62,7 @@ class QrServiceTest extends BaseServiceTest {
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(binaryData));
         BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(new BufferedImageLuminanceSource(bufferedImage)));
 
-        var result = new QRCodeReader().decode(binaryBitmap);
+        var result = new MultiFormatReader().decode(binaryBitmap);
 
         assertEquals(result.getText(), requestDTO.getText());
         assertEquals(result.getBarcodeFormat(), BarcodeFormat.QR_CODE);
