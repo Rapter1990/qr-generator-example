@@ -1,0 +1,1 @@
+# Spring Boot QR Generator Example
