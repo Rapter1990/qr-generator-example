@@ -17,11 +17,6 @@ public class ColorValidator implements ConstraintValidator<Color, String> {
     @Override
     public boolean isValid(String color, ConstraintValidatorContext constraintValidatorContext) {
 
-        // Only Expecting 6 Digits Hex Code
-        if (color == null || !color.startsWith("#") || color.length() != 7) {
-            return false;
-        }
-
-        return Pattern.compile("[a-fA-F0-9]{6}").matcher(color.substring(1)).matches();
+        return ValidatorUtil.validColor(color);
     }
 }

@@ -15,9 +15,7 @@ public class ImageSizeValidator implements ConstraintValidator<ImageSize, String
     @Override
     public boolean isValid(String size, ConstraintValidatorContext constraintValidatorContext) {
 
-        if(size.equals("small") || size.equals("medium") || size.equals("large")){
-            return true;
-        }
-        return false;
+        return ValidatorUtil.validImageSize(size);
+
     }
 }

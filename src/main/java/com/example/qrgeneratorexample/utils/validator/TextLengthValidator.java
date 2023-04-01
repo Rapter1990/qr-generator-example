@@ -14,10 +14,6 @@ public class TextLengthValidator implements ConstraintValidator<TextLength, Inte
     @Override
     public boolean isValid(Integer textSize, ConstraintValidatorContext constraintValidatorContext) {
 
-        if(textSize > 1 && textSize < 50){
-            return true;
-        }
-
-        return false;
+        return ValidatorUtil.validTextLength(textSize);
     }
 }
