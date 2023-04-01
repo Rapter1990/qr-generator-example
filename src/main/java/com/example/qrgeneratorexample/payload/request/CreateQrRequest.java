@@ -4,7 +4,11 @@ import com.example.qrgeneratorexample.utils.annotation.Color;
 import com.example.qrgeneratorexample.utils.annotation.ImageSize;
 import com.example.qrgeneratorexample.utils.annotation.TextLength;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class CreateQrRequest {
 
     @NotBlank
@@ -22,6 +26,4 @@ public class CreateQrRequest {
     @NotBlank
     @Color
     private String backgroundColor;
-
-    // Todo : Uplaod Image as FileUpload
 }
