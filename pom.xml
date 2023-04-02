@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<zxing.version>3.5.1</zxing.version>
+		<springdoc.openapi.version>2.0.2</springdoc.openapi.version>
 	</properties>
 	<dependencies>
 
@@ -51,6 +52,13 @@
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
 			<version>${zxing.version}</version>
+		</dependency>
+
+		<!-- OpenAPI -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${springdoc.openapi.version}</version>
 		</dependency>
 
 
