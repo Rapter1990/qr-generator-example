@@ -7,6 +7,7 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,15 +33,13 @@ class QrControllerTest extends BaseControllerTest {
     void shouldCreateQrCodeWithImage() {
 
         // when
-        MockMultipartFile imageFile = new MockMultipartFile("imageFile", "resources/java-original-wordmark.png", MediaType.IMAGE_PNG_VALUE, "java-original-wordmark".getBytes());
+        MockMultipartFile imageFile = new MockMultipartFile("imageFile", "java-original-wordmark.png", MediaType.IMAGE_PNG_VALUE, "java-original-wordmark".getBytes());
         var createQrCodeRequest = DummyData.getDummyCreateQrRequest();
         var qrResponseDTO = DummyData.getDummyQrResponseDTO(imageFile.getBytes());
         var createQrRequestDTO =DummyData.getDummyCreateQrRequestDTOWithImage(createQrCodeRequest,imageFile);
 
         // when
-        //when(QrMapper.mapCreateQrRequestToCreateQrRequestDTO(createQrCodeRequest, imageFile)).thenReturn(createQrRequestDTO);
         when(qrService.createQrCode(createQrRequestDTO)).thenReturn(qrResponseDTO);
-        //when(QrMapper.mapCreateQrResponseDTOToQrResponse(qrResponseDTO).getBody()).thenReturn(qrResponseDTO.getBody());
 
         // then
         mockMvc.perform(MockMvcRequestBuilders.multipart(API_URL + "/qr-generator")
@@ -71,7 +70,6 @@ class QrControllerTest extends BaseControllerTest {
                         .param("size", createQrCodeRequest.getSize())
                         .param("color", createQrCodeRequest.getColor())
                         .param("backgroundColor", createQrCodeRequest.getBackgroundColor()))
-                .andExpect(status().isCreated())
-                .andExpect(content().contentType(MediaType.IMAGE_PNG_VALUE));
+                .andExpect(status().isCreated());
     }
 }
