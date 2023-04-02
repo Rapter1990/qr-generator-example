@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  qr-generator-example:
+    image: 'qr-generator-example:latest'
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    networks:
+      -   qrGenerator
+
+networks:
+  qrGenerator:
