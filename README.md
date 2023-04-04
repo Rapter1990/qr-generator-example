@@ -1,6 +1,6 @@
 # Spring Boot QR Generator Example
 
-<img src="screenshots/main_image.PNG" alt="Main Information" width="800" height="600">
+<img src="screenshots/main_image.PNG" alt="Main Information" width="800" height="500">
 
 ### 📖 Information
 
