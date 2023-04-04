@@ -8,9 +8,9 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = ColorValidator.class)
-@Target(value = {ElementType.FIELD})
+@Target(value = {ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Color {
+public @interface ColorConstraint {
     String message() default "Invalid color hex code";
 
     Class<?>[] groups() default {};

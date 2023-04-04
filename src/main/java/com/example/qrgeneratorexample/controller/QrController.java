@@ -3,16 +3,21 @@ package com.example.qrgeneratorexample.controller;
 import com.example.qrgeneratorexample.mapper.QrMapper;
 import com.example.qrgeneratorexample.payload.request.CreateQrRequest;
 import com.example.qrgeneratorexample.service.QrService;
+import com.example.qrgeneratorexample.utils.annotation.ColorConstraint;
+import com.example.qrgeneratorexample.utils.annotation.ImageSizeConstraint;
+import com.example.qrgeneratorexample.utils.annotation.TextLengthConstraint;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +27,7 @@ import java.io.IOException;
 @RequestMapping("/api/v1/qr-generator")
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 @Tag(name = "QR Generator API v1", description = "QR Generator API to generate QR code with image or without image")
 public class QrController {
 
@@ -53,10 +59,10 @@ public class QrController {
             }
     )
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> createQrCode(@RequestParam String text,
-                                               @RequestParam String size,
-                                               @RequestParam String color,
-                                               @RequestParam String backgroundColor,
+    public ResponseEntity<byte[]> createQrCode(@RequestParam @TextLengthConstraint @NotBlank String text,
+                                               @RequestParam @ImageSizeConstraint @NotBlank String size,
+                                               @RequestParam @ColorConstraint @NotBlank String color,
+                                               @RequestParam @ColorConstraint @NotBlank String backgroundColor,
                                                @RequestParam(required = false) MultipartFile imageFile) throws IOException {
 
         CreateQrRequest request = CreateQrRequest.builder()

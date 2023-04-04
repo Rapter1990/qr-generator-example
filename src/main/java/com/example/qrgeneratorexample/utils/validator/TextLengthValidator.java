@@ -1,19 +1,24 @@
 package com.example.qrgeneratorexample.utils.validator;
 
-import com.example.qrgeneratorexample.utils.annotation.TextLength;
+import com.example.qrgeneratorexample.utils.annotation.TextLengthConstraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
-public class TextLengthValidator implements ConstraintValidator<TextLength, Integer> {
+@Slf4j
+@Component
+public class TextLengthValidator implements ConstraintValidator<TextLengthConstraint, String> {
 
     @Override
-    public void initialize(TextLength constraintAnnotation) {
+    public void initialize(TextLengthConstraint constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
-    public boolean isValid(Integer textSize, ConstraintValidatorContext constraintValidatorContext) {
-
-        return ValidatorUtil.validTextLength(textSize);
+    public boolean isValid(String textSize, ConstraintValidatorContext constraintValidatorContext) {
+        log.info("TextLengthValidator | isValid is working");
+        Integer textSizeLength = textSize.length();
+        return ValidatorUtil.validTextLength(textSizeLength);
     }
 }

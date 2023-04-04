@@ -1,20 +1,24 @@
 package com.example.qrgeneratorexample.utils.validator;
 
-import com.example.qrgeneratorexample.utils.annotation.ImageSize;
+import com.example.qrgeneratorexample.utils.annotation.ImageSizeConstraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
-public class ImageSizeValidator implements ConstraintValidator<ImageSize, String> {
+@Slf4j
+@Component
+public class ImageSizeValidator implements ConstraintValidator<ImageSizeConstraint, String> {
 
 
     @Override
-    public void initialize(ImageSize constraintAnnotation) {
+    public void initialize(ImageSizeConstraint constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
     public boolean isValid(String size, ConstraintValidatorContext constraintValidatorContext) {
-
+        log.info("ImageSizeValidator | isValid is working");
         return ValidatorUtil.validImageSize(size);
 
     }
